@@ -1,15 +1,10 @@
+- [Shirkavand] Cleaned the `sellers` dataset. Converted ZIP Codes to strings. No other actions were needed.
+- [Shirkavand] Cleaned the `order_payments` dataset. Removed 3 undefined payment records and 2 credit-card records with zero installments. Kept 6 zero-value voucher records. No other actions were needed.
 - [abolfazl moradi] Cleaned the `orders` dataset. Converted timestamp columns to datetime, set 250 impossible timestamps to `NaT`, flagged 1,132 approval-after-carrier cases, and added date and delivery metrics columns.
-
 - [abolfazl moradi] Cleaned the `customers` dataset. Converted ZIP codes to strings. No other actions were needed.
-
 - [abolfazl moradi] Cleaned the `products` dataset. Translated category names to English (2 added manually). Missing values were kept.
-
 - [abolfazl moradi] Cleaned the `order_items` dataset. Converted `shipping_limit_date` to datetime. Zero freight values were kept and documented.
-
 - [abolfazl moradi] Cleaned the `geolocation` dataset. Converted ZIP codes to strings, standardized city names, and removed 279,669 exact duplicate rows.
-
 - [abolfazl moradi] Cleaned the `reviews` dataset. Converted review dates to datetime. Duplicated `review_id` values were kept and documented.
-
 - [abolfazl moradi] Validated joins between all cleaned tables. `payments`, `reviews`, and `geolocation` must be aggregated before joining to avoid row multiplication.
-
 - [abolfazl moradi] Saved cleaned tables to `Data/Processed/` and wrote the full report in `data_cleaning_report.md`.
