@@ -16,5 +16,6 @@
 - [Shirkavand] Reviews: documented that shared `review_id` values always belong to one customer. Join rule changed to the latest review per order.
 - [Shirkavand] Moved cross-table checks to a final section, filled placeholder numbers, corrected notebook 1 descriptions, and updated notebook 3 conclusions (non-fulfilment rate 1.24%, Black Friday confirmed with daily data, orders per day). Renamed notebook 3 to `3_order_status_time_trends.ipynb`.
 - [Shirkavand] Added pinned `requirements.txt` and a full `README.md`.
-- [Shirkavand] Finish Issue 4
+- [Shirkavand] Finish Issue 4 (Order Status Time Trends)
 - [abolfazl_moradi] finsh tasks 1 & 2 of issue 5 (geographic distribution analysis part)
+- [Shirkavand] Finish Issue 8 (Reviews and Customer Satisfication)
