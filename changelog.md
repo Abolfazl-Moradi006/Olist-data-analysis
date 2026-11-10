@@ -1,5 +1,5 @@
 - [Shirkavand] Cleaned the `sellers` dataset. Converted ZIP Codes to strings. No other actions were needed.
-- [Shirkavand] Cleaned the `order_payments` dataset. Removed 3 undefined payment records and 2 credit-card records with zero installments. Kept 6 zero-value voucher records. No other actions were needed.
+- [Shirkavand] Cleaned the `order_payments` dataset. Removed 3 undefined payment records and 2 credit-card records with zero installments. Kept 6 zero-value voucher records. No other actions were needed. **(Superseded: the processed data comes from `2_data_cleaning.ipynb`, which keeps all 103,886 payment records and sets the 2 zero installments to missing.)**
 - [abolfazl moradi] Cleaned the `orders` dataset. Converted timestamp columns to datetime, set 250 impossible timestamps to `NaT`, flagged 1,132 approval-after-carrier cases, and added date and delivery metrics columns.
 - [abolfazl moradi] Cleaned the `customers` dataset. Converted ZIP codes to strings. No other actions were needed.
 - [abolfazl moradi] Cleaned the `products` dataset. Translated category names to English (2 added manually). Missing values were kept.
@@ -7,4 +7,13 @@
 - [abolfazl moradi] Cleaned the `geolocation` dataset. Converted ZIP codes to strings, standardized city names, and removed 279,669 exact duplicate rows.
 - [abolfazl moradi] Cleaned the `reviews` dataset. Converted review dates to datetime. Duplicated `review_id` values were kept and documented.
 - [abolfazl moradi] Validated joins between all cleaned tables. `payments`, `reviews`, and `geolocation` must be aggregated before joining to avoid row multiplication.
-- [abolfazl moradi] Saved cleaned tables to `Data/Processed/` and wrote the full report in `data_cleaning_report.md`.
+- [abolfazl moradi] Saved cleaned tables to `Data/Processed/` and wrote the full report in the notebook (exported to `Reports/data_cleaning_report.md` on 2026-11-04).
+- [Shirkavand] Switched processed data from CSV to Parquet (`Data/Processed/*.parquet`), so ZIP prefixes, timestamps, and flags keep their types when reloaded. Added a round-trip check. Removed the old CSVs and the `olist.duckdb` file. Notebook 3 now uses an in-memory DuckDB connection over the Parquet files.
+- [Shirkavand] Orders: fixed `delivery_delay_days` to use calendar days (late delivered orders: 6,534, not 7,826). Added `is_late`, `approval_hours`, `carrier_to_customer_days`, and 4 `flag_*` anomaly columns. Carrier-before-purchase timestamps (166) are now kept and flagged instead of set to `NaT`; 84 timestamps are set to `NaT`.
+- [Shirkavand] Products: validation now runs on the translated table. Missing categories set to `"unknown"`. Renamed `product_name_lenght` / `product_description_lenght` to `..._length`.
+- [Shirkavand] Geolocation: removed 33 points outside Brazil. Added `geolocation_prefix` (one row per ZIP prefix, median coordinates) for joins.
+- [Shirkavand] Payments: `payment_installments` is now `Int64`. Mismatch check rounds to cents (303 real mismatches) and documents installment interest as the likely cause.
+- [Shirkavand] Reviews: documented that shared `review_id` values always belong to one customer. Join rule changed to the latest review per order.
+- [Shirkavand] Moved cross-table checks to a final section, filled placeholder numbers, corrected notebook 1 descriptions, and updated notebook 3 conclusions (non-fulfilment rate 1.24%, Black Friday confirmed with daily data, orders per day). Renamed notebook 3 to `3_order_status_time_trends.ipynb`.
+- [Shirkavand] Added pinned `requirements.txt` and a full `README.md`.
+- [Shirkavand] Finish Issue 4
