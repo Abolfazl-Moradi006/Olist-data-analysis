@@ -46,6 +46,8 @@ product_category_name_translation.csv
 brazil_states_population.csv
 ```
 
+> **Important:** put the raw CSV files directly in `Data/Raw/` (for example `Data/Raw/olist_orders_dataset.csv`), not in a subfolder. All notebooks read the raw data from this path and write the cleaned tables to `Data/Processed/`, so they fail if the files are anywhere else.
+
 ## 3. Run the final notebook
 
 Open `notebooks/final_analysis.ipynb` and run all cells (*Restart & Run All*), or run it headless from the project root:
