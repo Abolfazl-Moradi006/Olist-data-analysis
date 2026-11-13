@@ -222,5 +222,4 @@ __marimo__/
 # Processed datasets
 Data/Processed/
 
-#duckdb
-Data/duckdb
+
